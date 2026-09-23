@@ -35,7 +35,7 @@ def parse(data):
         'server_port': server_port,
         'uuid': uuid,
     }
-    if netquery.get('packetEncoding'):
+    if netquery.get('packetEncoding').lower() != "none":
         node['packet_encoding'] = netquery['packetEncoding']
     flow = netquery.get('flow')
     if flow and flow.lower() != 'none':
@@ -94,7 +94,7 @@ def parse(data):
                 'type':'grpc',
                 'service_name':netquery.get('serviceName', '')
             }
-        else:
+        elif netquery['type'] == 'xhttp':
             return None # 不支持xhttp
     elif netquery.get('obfs'):  #shadowrocket
         if netquery['obfs'] == 'websocket':

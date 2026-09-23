@@ -35,8 +35,9 @@ def parse(data):
         'server_port': server_port,
         'uuid': uuid,
     }
-    if netquery.get('packetEncoding').lower() != "none":
-        node['packet_encoding'] = netquery['packetEncoding']
+    packet_encoding = netquery.get('packetEncoding')
+    if packet_encoding and packet_encoding.lower() != "none":
+        node['packet_encoding'] = packet_encoding
     flow = netquery.get('flow')
     if flow and flow.lower() != 'none':
         node['flow'] = flow
